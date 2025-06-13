@@ -119,6 +119,7 @@ class PotokenExtractor:
     @staticmethod
     async def _click_on_player(tab: nodriver.Tab) -> bool:
         try:
+            await asyncio.sleep(3)
             player = await tab.select('#movie_player', 10)
         except asyncio.TimeoutError:
             logger.warning('update failed: unable to locate video player on the page')
