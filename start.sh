@@ -26,16 +26,5 @@ apt-get update && apt-get install -y \
     wget \
     curl
 
-# Optional: define Chromium path explicitly for nodriver
-CHROMIUM_PATH=$(which chromium-browser || which chromium || echo "/usr/bin/chromium-browser")
-
-if [ ! -f "$CHROMIUM_PATH" ]; then
-  echo "❌ Chromium installation failed or path not found!"
-  exit 1
-fi
-
-echo "✅ Chromium installed at $CHROMIUM_PATH"
-
-# Run your Python script with the correct path
 echo "🚀 Running potoken-generator..."
 python3 potoken-generator.py
