@@ -45,13 +45,20 @@ class PotokenServer:
 
         return status, headers, page
 
+    def status(self) -> Tuple[str, list, str]:
+        # Simple status page for cron job or health checks
+        status = '200 OK'
+        headers = [('Content-Type', 'text/plain')]
+        page = 'OK'
+        return status, headers, page
+
     def get_route_handler(self, route: str) -> Callable[[], Tuple[str, list, str]]:
         handlers = {
-            # handler is a function returning a tuple of status, headers, page text
             '/404': lambda: ('404 Not Found', [('Content-Type', 'text/plain')], 'Not Found'),
             '/': lambda: ('302 Found', [('Location', '/token')], '/token'),
             '/token': self.get_potoken,
-            '/update': self.request_update
+            '/update': self.request_update,
+            '/status': self.status,  # new status route
         }
         return handlers.get(route) or handlers['/404']
 
