@@ -18,9 +18,9 @@ COPY potoken_generator/ ./potoken_generator/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY docker/scripts/startup.sh ./
+COPY docker/scripts/startup-webserver.sh ./
 
 RUN sed -i 's/await self.sleep(0.5)/await self.sleep(2)/' /usr/local/lib/python3.12/site-packages/nodriver/core/browser.py
 
 # Run
-CMD [ "./startup.sh"]
+CMD [ "./startup-webserver.sh"]
